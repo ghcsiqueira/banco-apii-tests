@@ -11,7 +11,7 @@ describe('Login API', () => {
                 .set('Content-Type', 'application/json')
                 .send({
                     username: 'julio.lima',
-                    password: '123456'
+                    senha: '123456'
                 });
             
             expect(response.status).to.be.equal(200);
