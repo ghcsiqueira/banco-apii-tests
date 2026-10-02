@@ -1,22 +1,14 @@
 const request = require('supertest');
 const { expect } = require('chai');
-
+const { obtainToken } = require('../helpers/autenticacao');
 
 describe('Transferencia API', () => {
     describe('POST /transferencia', () => {
         it('should return 201 when valor is more or equal to 10', async () => {
 
-            const responseLogin = await request('http://localhost:3000')
-                .post('/login')
-                .set('Content-Type', 'application/json')
-                .send({
-                    username: 'julio.lima',
-                    senha: '123456'
-                });
+            const token = await obtainToken('julio.lima', '123456');
 
-            const token = responseLogin.body.token;
-
-            const responseTransfer = await request('http://localhost:3000')
+            const responseTransfer = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
@@ -33,17 +25,10 @@ describe('Transferencia API', () => {
         });
 
         it('should return 422 when valor is less than 10', async () => {
-            const responseLogin = await request('http://localhost:3000')
-            .post('/login')
-            .set('Content-Type', 'application/json')
-            .send({
-                username: 'julio.lima',
-                senha: '123456'
-            });
-
-        const token = responseLogin.body.token;
             
-            const responseTransfer = await request('http://localhost:3000')
+            const token = await obtainToken('julio.lima', '123456');
+
+            const responseTransfer = await request(process.env.BASE_URL)
                 .post('/transferencias')
                 .set('Content-Type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
