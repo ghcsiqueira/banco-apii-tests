@@ -4,9 +4,14 @@ const { obtainToken } = require('../helpers/autenticacao');
 
 describe('Transferencia API', () => {
     describe('POST /transferencia', () => {
-        it('should return 201 when valor is more or equal to 10', async () => {
 
-            const token = await obtainToken('julio.lima', '123456');
+        let token;
+
+        before(async () => {
+            token = await obtainToken('julio.lima', '123456');
+        });
+
+        it('should return 201 when valor is more or equal to 10', async () => {
 
             const responseTransfer = await request(process.env.BASE_URL)
                 .post('/transferencias')
@@ -25,8 +30,6 @@ describe('Transferencia API', () => {
         });
 
         it('should return 422 when valor is less than 10', async () => {
-            
-            const token = await obtainToken('julio.lima', '123456');
 
             const responseTransfer = await request(process.env.BASE_URL)
                 .post('/transferencias')
