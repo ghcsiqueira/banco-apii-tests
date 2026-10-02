@@ -1,12 +1,13 @@
 const request = require('supertest');
 const { expect } = require('chai');
+require('dotenv').config();
 
 describe('Login API', () => {
     describe('POST /login', () => {
 
         it('should return 200 OK', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .post('/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -21,7 +22,7 @@ describe('Login API', () => {
 
         it('should return 400 Bad request password is required', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .post('/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -36,7 +37,7 @@ describe('Login API', () => {
 
         it('should return 400 Bad request username is required', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .post('/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -51,7 +52,7 @@ describe('Login API', () => {
         
         it('should return 401 unauthorized', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .post('/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -68,7 +69,7 @@ describe('Login API', () => {
 
         it('should return 405 Not Allowed', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .get('/login')
                 .set('Content-Type', 'application/json')
                 .send({
@@ -84,7 +85,7 @@ describe('Login API', () => {
 
         it('should return 500 internal server error', async () => {
 
-            const response = await request('http://localhost:3000')
+            const response = await request(process.env.BASE_URL)
                 .post('/login')
                 .set('Content-Type', 'application/json')
                 .send({
