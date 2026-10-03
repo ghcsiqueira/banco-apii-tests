@@ -246,3 +246,4 @@ https://nodejs.org/
 - As dependências do projeto são instaladas com `npm install`.
 - Os testes são executados por meio do script `npm test`.
 - O relatório HTML é gerado pelo Mochawesome após a execução dos testes.
+- Este README foi gerado com auxílio de IA generativa.
